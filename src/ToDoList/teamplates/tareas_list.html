@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<body>
+
+    {% extends "base.html" %}
+
+    {% block content %}
+    <h1>Tareas:<H1>
+        <table class="table">
+            <thead>
+                <th>Tarea</th>
+                <th>Fecha limite</th>
+                <th></th>
+            </thead>
+            <tbody>
+                {% for task in tareas%}
+                {% if task.user == request.user %}
+                <tr>
+                    <td>{{ task.task_name }}</td>
+                    <td>
+                        {% if task.is_past_due %}
+                        <p class="text-danger">tarea vencida desde: {{ task.expiration_day }}</p>
+                        {% else %}
+                        {{ task.expiration_day }}
+      
+                        {% endif %}
+      
+                    </td>
+                    <td><a href="tarea/{{ task.id }}">Detalle</a></td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endblock %}
+</body>
+</html>

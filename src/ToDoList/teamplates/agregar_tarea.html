@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+    <title>Agregar tarea</title>
+
+</head>
+<body>
+
+    {% extends "base.html" %}
+
+    {% block content %}
+
+    <form method="POST" action=".">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Agregar</button>
+    </form>
+    {% if error %}
+        Error de validacion en el formulario
+    {% endif %}
+
+    {% endblock %}
+
+</body>
+</html>
