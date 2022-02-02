@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<body>
+
+    {% extends "base.html" %}
+
+    {% block content %}
+    <h1>Tarea: <H1>
+    <p>Nombre de tarea: {{ tarea.task_name }}</p>
+    <p>Estado: {{tarea.status}}</p>
+    <p>Descripcion: {{ tarea.task_description }}</p>
+    <p>Comentario: {{ tarea.coment }}</p>
+    <p>Fecha final: {{ tarea.expiration_day }}</p>
+
+    <div>
+        {% csrf_token %}
+        <a href="../delete/{{tarea.id}}" class="btn btn-danger">Eliminar tarea</a>
+    </div>
+
+    <div>
+        {% csrf_token %}
+        <a href="../edit/{{tarea.id}}" class="btn btn-success">Editar tarea</a>
+    </div>
+
+    {% endblock %}
+
+</body>
+</html>
