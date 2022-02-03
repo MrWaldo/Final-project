@@ -3,6 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import redirect
+from django.db.models import Q
 from tareas.forms import AddTaskForm, EditTaskForm
 import datetime
 
@@ -12,6 +13,7 @@ from .models import Task
 @login_required
 def add_tarea(request):
     form = AddTaskForm()
+    form.instance.user = request.user
     error = False
     if request.method == 'POST':
         form = AddTaskForm(request.POST)
@@ -25,7 +27,16 @@ def add_tarea(request):
 
 @login_required
 def get_tareas(request):
+    busqueda = request.GET.get("buscar")
     tareas = Task.objects.all()
+
+    if busqueda:
+        tareas = Task.objects.filter(
+            Q(task_name__icontains = busqueda) |
+            Q(task_description__icontains = busqueda) |
+            Q(status__icontains = busqueda)
+        ).distinct()
+
     return render(request, 'tareas_list.html', context={'tareas': tareas})
 
 

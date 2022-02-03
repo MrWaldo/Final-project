@@ -15,7 +15,7 @@ class Task(models.Model):
     coment = models.CharField(max_length=30, default='Sin comentarios')
     expiration_day = models.DateTimeField(null=True, blank=True)
     status = models.CharField(max_length=10, default='ToDo', choices=STATUS_CHOICES)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
     task_id = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
