@@ -5,7 +5,20 @@
     {% extends "base.html" %}
 
     {% block content %}
-    <h1>Tareas:<H1>
+    <form method="GET" class="d-none d-sm-inline-block form-inline mr-auto">
+
+        <div class="input-group">
+            <p>buscador</p>
+            <input type="text" class="form-control bg-ligth border-0 small" placeholder="Buscar..." name="buscar" value="">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">
+                    <p>Buscar</p>
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <h2>Tareas:</h2>
         <table class="table">
             <thead>
                 <th>Tarea</th>
