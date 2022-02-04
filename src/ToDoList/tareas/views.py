@@ -8,6 +8,7 @@ from tareas.forms import AddTaskForm, EditTaskForm
 import datetime
 
 from .models import Task
+from .forms import CustomUserCreationForm
 
 
 @login_required
@@ -73,3 +74,6 @@ def editar_tarea(request, task_id):
         form.save(commit=True)
     return render(request, 'editar_tarea.html', context={'form': form, 'task': task})
 
+
+def register(request):
+    return render(request, 'registration/register.html', context={'form': CustomUserCreationForm()})
